@@ -4,10 +4,14 @@ mesma coisa que o uses do Delphi ou Lazarus (ALT+F11)
 */
 require './controle/conexao.php';
 /*
-semelhante ao connected do Delphi ou Lazarus (Query)
+FDQuery do Delphi ou ZQuery do Lazarus
+Conectamos a Query
 */
 $pdo = Conexao::conectar();
-$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$sql = "select * from categorias;";/*propriedade sql da query do Delphi / Lazarus*/
+$prp = $pdo->prepare($sql);/*seria o principio lógico de preparação para o execsql ou open da query no Delphi / Lazarus*/
+$prp->execute();/*execsql ou open da query no Delphi / Lazarus*/
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -32,12 +36,11 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
                         Categorias
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <?php while ($data = $prp->fetch(PDO::FETCH_ASSOC)) { /*$data é igual ao datasource do Delphi / Lazarus*/ ?>
+                            <li><a class="dropdown-item" href="listarprodutos.php?op=cat&id=<?php echo $data['catid']; ?>">
+                                    <?php echo $data['catnome']; ?>
+                                </a></li>
+                        <?php } ?>
                     </ul>
                 </li>
                 <li class="nav-item">
