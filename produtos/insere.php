@@ -47,13 +47,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="edtquantidade">Quantidade</label>
                 <input type="number" name="edtquantidade" id="edtquantidade" class="form-control">
             </div>
-              <div class="form-group mt-2">
-                <label for="edtsubcategoria">Subcategoria</label>
-                <input type="text" name="edtsubid" id="edtsubid" class="form-control mb-1" readonly>
-                <input type="text" name="edtsubcategoria" id="edtsubcategoria" class="form-control">
+            <label for="edtsubcategoria" class="mt-2">Subcategoria</label>
+            <div class="input-group">
+                <input type="text" class="input-group-text" name="edtsubid" id="edtsubid" readonly>
+                <input type="text" name="edtsubcategoria" id="edtsubcategoria" class="form-control" readonly>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#frmsubcategoria">Buscar</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="frmsubcategoria" tabindex="-1" aria-labelledby="frmsubcategoriaLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="frmsubcategoriaLabel">Lista Subcategorias</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <?php
+                            $sqlsub = "select * from subcategorias;";
+                            $prpsub = $pdo->prepare($sqlsub);
+                            $prpsub->execute();
+                            ?>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            Subcategorias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    while ($dssubcategoria = $prpsub->fetch(PDO::FETCH_ASSOC)) {
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo $dssubcategoria['subnome']; ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Selecionar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>
