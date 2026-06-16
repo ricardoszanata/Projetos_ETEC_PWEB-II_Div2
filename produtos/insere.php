@@ -83,6 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <td>
                                                 <?php echo $dssubcategoria['subnome']; ?>
                                             </td>
+                                            <td>
+                                                <button onclick="pegaSubcategoria()" class="btn btn-outline-info">Selecionar</button>
+                                            </td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
