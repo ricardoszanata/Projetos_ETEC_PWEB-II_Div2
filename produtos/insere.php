@@ -53,7 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="text" name="edtsubcategoria" id="edtsubcategoria" class="form-control" readonly>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#frmsubcategoria">Buscar</button>
             </div>
-            <!-- Modal -->
+        </form>
+        <!-- Modal -->
             <div class="modal fade" id="frmsubcategoria" tabindex="-1" aria-labelledby="frmsubcategoriaLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -84,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <?php echo $dssubcategoria['subnome']; ?>
                                             </td>
                                             <td>
-                                                <button onclick="pegaSubcategoria()" class="btn btn-outline-info">Selecionar</button>
+                                                <button onclick="pegaSubcategoria(<?php echo $dssubcategoria['subid'];?>,'<?php echo $dssubcategoria['subnome'];?>')" class="btn btn-outline-info">Selecionar</button>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -92,14 +93,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Selecionar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
     </div>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
