@@ -9,9 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $valorvenda = filter_input(INPUT_POST, 'edtvlvenda');
     $quantidade = filter_input(INPUT_POST, 'edtquantidade');
     $subid = filter_input(INPUT_POST, 'edtsubid');
-    $sqlpro = "";
+    $sqlpro = "insert into produtos(pronome,prodescricao,provalorcusto,provalorvenda,proquantidade,prosubid)values(?,?,?,?,?,?)";
     $prppro = $pdo->prepare($sqlpro);
-    $prppro->execute();
+    $prppro->execute([$nome,$descricao,$valorcusto,$valorvenda,$quantidade,$subid]);
 }
 ?>
 <!DOCTYPE html>
